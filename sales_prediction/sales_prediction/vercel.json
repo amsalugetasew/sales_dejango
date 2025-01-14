@@ -1,0 +1,14 @@
+{
+    "builds": [{
+        "src": "sales_prediction/wsgi.py",
+        "use":"@vercel/python",
+        "config": {"maxLambdasize": "15mb", "runtime": "python3.13"}
+
+    }],
+    "routes":[
+        {
+            "src":"/(.*)",
+            "dest": "sales_prediction/wsgi.py"
+        }
+    ]
+}

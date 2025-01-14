@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+
+        form {
+            width: 60%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            grid-column: span 2;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        h2 {
+            text-align: center;
+            color: #27ae60;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sales Prediction</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Row 1 -->
+        <div>
+            <label for="Store">Store:</label>
+            <input type="number" id="Store" name="Store" value="{{ form.Store.value }}">
+            
+            {% if form.Store.errors %}
+                <div class="error">{{ form.Store.errors }}</div>
+            {% endif %}
+        </div>
+        <div>
+            <label for="DayOfWeek">Day of week:</label>
+            <select id="DayOfWeek" name="DayOfWeek">
+                <option value="1" {% if form.DayOfWeek.value == '1' %}selected{% endif %}>first day</option>
+                <option value="2" {% if form.DayOfWeek.value == '2' %}selected{% endif %}>second day</option>
+                <option value="3" {% if form.DayOfWeek.value == '3' %}selected{% endif %}>third day</option>
+                <option value="4" {% if form.DayOfWeek.value == '4' %}selected{% endif %}>fourth day</option>
+                <option value="5" {% if form.DayOfWeek.value == '5' %}selected{% endif %}>fifth day</option>
+                <option value="6" {% if form.DayOfWeek.value == '6' %}selected{% endif %}>sexth day</option>
+                <option value="7" {% if form.DayOfWeek.value == '7' %}selected{% endif %}>seventh day</option>
+            </select>
+            {% if form.DayOfWeek.errors %}
+                <div class="error">{{ form.DayOfWeek.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Row 2 -->
+        <div>
+            <label for="Date">Date:</label>
+            <input type="date" id="Date" name="Date" value="{{ form.Date.value }}">
+            {% if form.Date.errors %}
+                <div class="error">{{ form.Date.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Row 3 -->
+        <div>
+            <label for="Customers">Customers:</label>
+            <input type="number" id="Customers" name="Customers" value="{{ form.Customers.value }}">
+            {% if form.Customers.errors %}
+                <div class="error">{{ form.Customers.errors }}</div>
+            {% endif %}
+        </div>
+        <div>
+            <label for="Open">Open status:</label>
+            <select id="Open" name="Open">
+                <option value="1" {% if form.Open.value == '1' %}selected{% endif %}>Open</option>
+                <option value="0" {% if form.Open.value == '0' %}selected{% endif %}>Closed</option>
+            </select>
+            {% if form.Open.errors %}
+                <div class="error">{{ form.Open.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Row 4 -->
+        <div>
+            <label for="Promo">Promo:</label>
+            <select id="Promo" name="Promo">
+                <option value="1" {% if form.Promo.value == '1' %}selected{% endif %}>Promot</option>
+                <option value="0" {% if form.Promo.value == '0' %}selected{% endif %}>Not Promot</option>
+            </select>
+            {% if form.Promo.errors %}
+                <div class="error">{{ form.Promo.errors }}</div>
+            {% endif %}
+        </div>
+        <div>
+            <label for="StateHoliday">State holiday:</label>
+              <select id="StateHoliday" name="StateHoliday">
+                <option value="0" {% if form.StateHoliday.value == '0' %}selected{% endif %}>Normal</option>
+                <option value="a" {% if form.StateHoliday.value == 'a' %}selected{% endif %}>a</option>
+                <option value="b" {% if form.StateHoliday.value == 'b' %}selected{% endif %}>b</option>
+                <option value="c" {% if form.StateHoliday.value == 'c' %}selected{% endif %}>c</option>
+            </select>
+            {% if form.StateHoliday.errors %}
+                <div class="error">{{ form.StateHoliday.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Row 5 -->
+        <div>
+            <label for="SchoolHoliday">School holiday:</label>
+            <select id="SchoolHoliday" name="SchoolHoliday">
+                <option value="1" {% if form.SchoolHoliday.value == '1' %}selected{% endif %}>School Day</option>
+                <option value="0" {% if form.SchoolHoliday.value == '0' %}selected{% endif %}>Not School Day</option>
+            </select>
+            {% if form.SchoolHoliday.errors %}
+                <div class="error">{{ form.SchoolHoliday.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction is not None %}
+        <h2>Predicted Sales: {{ prediction }}</h2>
+    {% elif form.errors %}
+        <h2 style="color: red;">There was an error in the form. Please correct it and try again.</h2>
+    {% endif %}
+
+</body>
+</html>

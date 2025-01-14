@@ -1,0 +1,2 @@
+web: gunicorn sales_prediction.wsgi:application --log-file -
+release: bash release.sh
