@@ -1,18 +1,18 @@
 {
     "builds": [
         {
-            "src": "sales_prediction/sales_prediction/wsgi.py",
+            "src": "sales_prediction/wsgi.py",
             "use": "@vercel/python",
             "config": {
-                "maxLambdasize": "15mb",
-                "runtime": "python3.13"
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.9"
             }
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "sales_prediction/sales_prediction/wsgi.py"
+            "dest": "sales_prediction/wsgi.py"
         }
     ]
 }
